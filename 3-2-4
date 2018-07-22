@@ -1,0 +1,25 @@
+#!/bin/bash
+#Description : hostCheck custom
+#Written by Rico
+#Version 1.00
+
+read -p "what is net you want to scan? " myNet
+read -p "what host you want to start scan? " startIp
+read -p "what host you want to end scan? " endIp
+
+rightnowIp=$startIp
+
+while [ $rightnowIp -le $endIp ]
+do
+	echo -n "pinging $myNet.$rightnowIp......"
+	ping -c 1 -i 0.2 -W 1 $myNet.$rightnowIp &> /dev/null
+	if [ $? -eq 0 ]
+		then
+			echo "you can use that ip"
+		else
+			echo""
+		fi
+	let rightnowIp=$rightnowIp+1
+done
+
+exit 0

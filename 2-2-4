@@ -1,0 +1,23 @@
+#!/bin/bash
+#Description : replace variable and check replacement
+#Written by Rico
+#Version 1.00
+
+read -p "give me your Name: " yourName
+read -p "give me your Phone number: " yourNumber
+read -p "give me your E-mail address: " yourEmail
+#根本安安幾歲住哪
+read -p "give me your age: " yourAge
+read -p "give me your addressSSss: " yourAddress
+
+#依照資料庫的原理，沒填寫以null值處理
+for x in ${yourName:-null} ${yourNumber:-null} ${yourEmail:-null} ${yourAge:-null} ${yourAddress:-null}
+do
+#不能把變數檢查替換放在這，如果for那邊只有單純的yourName的話會視為空值，for不會去跑yourName
+	echo -n $x >> /home/iot/Rico/cc101/SS/homework/contacts
+	echo -n " " >> /home/iot/Rico/cc101/SS/homework/contacts
+done
+#換行
+echo "" >> /home/iot/Rico/cc101/SS/homework/contacts
+
+exit 0

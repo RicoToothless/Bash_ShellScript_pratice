@@ -1,0 +1,44 @@
+#!/bin/bash
+#Description : YOOOOOO you wanna rich? buy a or more lotteries
+#Written by Rico
+#Version 1.00
+
+read -p "how many lottery you wanna buy? " lotteryCount
+
+#可以依照使用者想要買幾張彩券而跑幾"行"的結果
+for (( x=1 ; x<=$lotteryCount ; x=x+1 ))
+do
+	#49個數字一張內雖然不可重複，但如果沒有這裡歸零的動作，如果買好幾張彩券49個數字
+	#會被陣列全部用完，所以每張彩券都要把彩券數字重設，不同張彩券數字重複沒關係
+	unset myNumber
+	declare -a myNumber
+	#開始給予每張彩券6個數字，NumberCount為第幾個數字
+	NumberCount=1
+	while [ $NumberCount -le 6 ]
+	do
+		#給予亂數+1，避免得到數字0
+		let Number=$RANDOM*49/32767+1
+		#開始驗證6個數字裡面是否有重複到
+		for (( z=1 ; z<=6 ; z=z+1  ))
+		do
+			#把亂數的數字跟所有6個數字去做有沒有重複的比對
+			#一定會有第一次與還沒產生的彩券號碼，所以先用一個數字代替
+			#跟上一題雷同，只是這次空值的替換要換成1~49都沒有的數字50
+			#如果數字重複的就給他一個數字，也不一定要51，只要下面的
+			#可以做coutinue的條件達成就可以了，不知道為何用unset有問題
+			[ $Number -eq ${myNumber[$z]:-50} ] && Number=51
+		done
+		#呼應剛剛自己設的數字，但也不要忘記數字不可以介於1~49，然後回到while
+		#的迴圈再給一次亂數
+		[ $Number -eq 51 ] && continue
+		#經過重重的重複檢驗後，把數字裝進彩券的號碼(myNumber)裡
+		myNumber[$NumberCount]=$Number
+		#所有的動作都完成後才算完成產生彩券號碼
+		let NumberCount=$NumberCount+1
+	done
+	#最後顯示6個數字與換行
+	echo -n "lottery $x ) ${myNumber[@]} "
+	echo ""
+done
+
+exit 0

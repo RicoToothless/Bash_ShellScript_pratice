@@ -1,0 +1,25 @@
+#!/bin/bash
+#Description : numder < 1000
+#Written by Rico
+#Version 1.00
+
+read -p "give me a number please: " myNum
+
+#要先從倍數1開始
+multipleNum=1
+#總和從0開始
+Summary=0
+
+#指總和大於1000不會執行do & done，所以只有小於才可以
+until [ $Summary -gt 1000 ]
+do
+	let Summary=$myNum*$multipleNum
+	#倍數一直往上乘*1 *2 *3 *4這樣
+	let multipleNum=$multipleNum+1
+	#重點在這，因為上面的until對於若是像是999的數字還是會繼續執行
+	#再乘一次絕對會超過1000，所以這裡還要加個對於總和的判斷
+	[ $Summary -ge 1000 ] || echo $Summary
+done
+
+exit 0
+

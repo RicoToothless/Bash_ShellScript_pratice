@@ -1,0 +1,14 @@
+#!/bin/bash
+#Description: read test & >
+#Written by Rico
+#Version 1.00
+
+read -p "give me command: " myComm
+
+if [ -n $myComm ]
+then
+	$myComm 2>> /dev/null | tee -a /home/iot/Rico/cc101/SS/homework/commRecoder.txt
+	
+fi
+
+exit 0

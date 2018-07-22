@@ -1,0 +1,22 @@
+#!/bin/bash
+#Desciption : function +-*/
+#Writeen by Rico
+#Verison 1.00
+
+function CALCULATOR ()
+{
+let Summary=$1$2$3$4$5
+echo $Summary	
+}
+
+read -p "give me number: " yourNumA
+read -p "you wanna add subtract multiply divide ? " yourCalculateB
+read -p "give me number: " yourNumC
+read -p "you wanna add subtract multiply divide ? " yourCalculateD
+read -p "give me number: " yourNumE
+
+CALCULATOR $yourNumA $yourCalculateB $yourNumC $yourCalculateD $yourNumE
+
+
+exit 0
+

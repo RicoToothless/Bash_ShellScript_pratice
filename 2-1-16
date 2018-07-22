@@ -1,0 +1,50 @@
+#!/bin/bash
+#Description : draw a diamond!!
+#Written by Rico
+#Version 1.00
+
+#做上半部份的大三角形，先從行數開始
+for (( x=1 ; x<=4 ; x=x+1 ))  
+do
+	#先畫每一行的空白處，為倒三角形
+	for (( y=3 ; y>=x ; y=y-1 ))
+	do
+		echo -n " "
+	done
+	#接下來畫每一行左半部份的*
+	for (( z=1 ; z<=x ; z=z+1 ))
+	do
+		echo -n "*"
+	done
+	#畫每一行裡右半部份的*
+	for (( a=1 ; a<x ; a=a+1  ))
+	do
+		echo -n "*"
+	done
+	#每行畫完就換行
+	echo ""
+done
+
+#做下半部份的倒三角形，一樣先從行數開始
+for (( x=1 ; x<=3 ; x=x+1  ))
+do
+	#畫空白的部份，為正三角形
+	for (( y=1 ; y<=x ; y=y+1  ))
+	do
+		echo -n " "
+	done
+	#畫每一行左半部份的*，為倒三角形
+	for (( z=3 ; z>=x ; z=z-1  ))
+	do
+		echo -n "*"
+	done
+	#畫每一行右半部份的*，為倒三角形
+	for (( a=2 ; a>=x ; a=a-1  ))	
+	do
+		echo -n "*"
+	done
+	#最後每行畫完換行
+	echo ""
+done
+
+exit 0

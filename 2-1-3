@@ -1,0 +1,27 @@
+#!/bin/bash
+#Description : read test permission for read write exec
+#Written by Rico
+#Version 1.00
+
+read -p "give me a filename: " myFile
+
+if [ -f $myFile ]
+then
+	if [ -r $myFile ]
+	then
+		echo "$myFile you can read"
+	fi
+
+	if [ -w $myFile ]
+	then
+		echo "$myFile you can write"
+	fi
+
+	if [ -x $myFile ]
+	then
+		echo "$myFile you can exec"
+	fi
+fi
+
+exit 0
+

@@ -1,0 +1,36 @@
+#!/bin/bash
+#Description : RANDOM TIME! 250~500
+#Written by Rico
+#Version 1.20
+count=1
+declare -a myNumber
+
+#先判斷號碼的次數有沒有小於等於30
+while [ $count -le 30 ]
+do
+	#給予亂數，+1避免遇到數字0
+	let Number=$RANDOM*500/32767+1
+	#如果亂數產生低於250就使用continue回到while再跑一次，次數不會+1
+	[ $Number -lt 250 ] && continue
+		#從所有的30個數字一一比對是否有重複
+		for (( x=1 ; x<=30 ; x=x+1  ))
+		do
+				#重點在於${myNumber[$x]:-1}，功能在於一開始第一次骰和
+				#後面還沒骰的陣列變數，都以1代替，1也低於250所以不會重複
+				#如果數字重複的就給他一個數字，小於250也不是1即可，只要
+				#下面的coutinue的條件達成就可以了，不知道為何用unset有問題
+				[ $Number -eq ${myNumber[$x]:-1} ] && Number=2
+		done
+	#呼應剛剛自己設的數字，但也不要忘記數字不可以介於1~49，然後回到while
+	#的迴圈再給一次亂數
+	[ $Number -eq 2 ] && continue
+	#把產生好的數字裝在myNumber的陣列變數裡
+	myNumber[$count]=$Number
+	#確定通過上面所有的篩選才算有效給的亂數次數
+	let count=$count+1
+done
+#最後一次顯示所有的陣列變數
+echo -n "${myNumber[*]} "
+echo ""
+
+exit 0

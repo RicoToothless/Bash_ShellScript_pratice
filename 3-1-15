@@ -1,0 +1,29 @@
+#!/bin/bash
+#Description : ls everywhere?
+#Written by Rico
+#Version 1.00
+
+PS3='where you want to look? '
+
+select x in '/home/iot' '/home/iot/Rico' '/home/iot/Rico/cc101' quit
+do
+	case $x in
+	'/home/iot')
+		ls -al /home/iot
+	;;
+	'/home/iot/Rico' )
+		ls -al /home/iot/Rico
+	;;
+	'/home/iot/Rico/cc101' )
+		ls -al /home/iot/Rico/cc101
+	;;
+	quit )
+		exit 0
+	;;
+	* )
+		echo "not a choose"
+	;;
+	esac
+done
+
+exit 0
